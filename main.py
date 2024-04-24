@@ -1,18 +1,23 @@
 import ita
-def list_input_txt():
-    a = open('input.txt', 'r')
-    map = []
-    data = a.read().split('\n')
-    for i in range(len(data)):
-        data[i] = data[i].split(' ')
-        for j in range(len(data[i])):
-            if data[i][j] == '':
-                data[i].pop(j)
-        for j in range(len(data[i])):
-            data[i][j] = data[i][j].replace(',', '').replace(']', '').replace('[', '').replace(' ', '')
-            data[i][j] = int(data[i][j])
-    map = list(filter(None, data))
-    return map
+# def list_input_txt():
+#     a = open('C:\Users\monhoc\ki 2 nam 2\congnghephanmem\baitapnhom\Game-of-life\input.txt', 'r')
+#     map = []
+#     data = a.read().split('\n')
+#     for i in range(len(data)):
+#         data[i] = data[i].split(' ')
+#         for j in range(len(data[i])):
+#             if data[i][j] == '':
+#                 data[i].pop(j)
+#         for j in range(len(data[i])):
+#             data[i][j] = data[i][j].replace(',', '').replace(']', '').replace('[', '').replace(' ', '')
+#             data[i][j] = int(data[i][j])
+#     map = list(filter(None, data))
+#     return map
+map = [[0, 1, 1],
+[0, 0, 0],
+[1, 0, 0]]
+
+
 def count_neighbours(map, x, y):
     count = 0
     if x - 1 >= 0 and y - 1 >= 0:
@@ -68,10 +73,21 @@ def lifegame_step(map, step):
     return results
      
 def main():
-    list_input_txt()
-    map = list_input_txt()
-    ani = lifegame_step(ita.lifegame_acorn(), 30)
-    ita.plot.animation_show(ani)
+    # list_input_txt()
+    # map = list_input_txt()
+    generations = lifegame_step(map, 10)
+    image_sequence = ita.array.make1d(len(generations))
+    
+    for i in range(len(generations)):
+        image = ita.array.make3d(len(generations[i]), len(generations[i][0]), 3)
+        for x in range(len(generations[i])):
+            for y in range(len(generations[i][x])):
+                if generations[i][x][y] == 1:
+                    image[x][y] = [0, 1,0 ]
+                else:
+                    image[x][y] = [1, 0, 0]
+        image_sequence[i] = image
+    ita.plot.animation_show(image_sequence)
 
 
 

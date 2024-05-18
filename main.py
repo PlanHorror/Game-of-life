@@ -71,9 +71,9 @@ def main():
     list_input_txt()
     map = list_input_txt()
     ani = lifegame_step(ita.lifegame_acorn(), 30)
-    ita.plot.animation_show(ani)
-
-
+    # ita.plot.animation_show(ani)
+    ita.plot.image_show(ita.lifegame_acorn())
+def draw_
 
 
 if __name__ == '__main__':
